@@ -5,19 +5,16 @@
         <header class="header">
           <div class="row">
             <div class="col-md-4">
-              <h1>Users</h1>
+              <h1 class="text-left">Users</h1>
             </div>
             <div class="col-md-6">
-            </div>
-            <div class="col-md-2">
-              <button type="button" class="btn btn-primary" (click)="redirectNewUserPage()">New User</button>
             </div>
           </div>
         </header>
       </section>
 
       <section class="main">
-        <table class="table">
+        <table class="table table-bordered table-hover">
           <thead>
             <tr>
               <th>ID</th>
@@ -46,4 +43,7 @@
       </section>
     </div>
   </div>
+  <div class="container">
+      <button type="button" class="btn btn-primary" (click)="redirectNewUserPage()">New User</button>
+    </div>
 </div>
