@@ -18,7 +18,27 @@
               <label>Email</label>
               <input type="email" class="form-control" formControlName="email">
             </div>
+
+            <div class="form-group">
+              <label>Date Created</label>
+              <input type="text" class="form-control" formControlName="dateCreated">
+            </div>
+
+            <div class="form-group">
+              <label>Date Updated</label>
+              <input type="text" class="form-control" formControlName="dateUpdated">
+            </div>
           </fieldset>
+
+          <div class="form-group">
+            <label>Picture reference</label>
+            <input type="text" class="form-control" formControlName="jpegReference">
+          </div>
+          
+          <div class="form-group">
+            <label>Status</label>
+            <input type="text" class="form-control" formControlName="applicationStatus">
+          </div>
 
           <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
           <button type="button" class="btn btn-warning" (click)="redirectUserPage()">Cancel</button>

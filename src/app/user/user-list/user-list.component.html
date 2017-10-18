@@ -5,14 +5,15 @@
         <header class="header">
           <div class="row">
             <div class="col-md-4">
-              <h1 class="text-left">Users</h1>
+              <h1 class="text-left">Applicants</h1>
             </div>
             <div class="col-md-6">
             </div>
           </div>
         </header>
       </section>
-
+      
+      <hr />
       <section class="main">
         <table class="table table-bordered table-hover">
           <thead>
@@ -21,6 +22,10 @@
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
+              <th>Date Created</th>
+              <th>Date Updated</th>
+              <th>Picture reference</th>
+              <th>Status of applicantion</th>
               <th>Update</th>
               <th>Delete</th>
             </tr>
@@ -31,8 +36,12 @@
               <td>{{user.firstName}}</td>
               <td>{{user.lastName}}</td>
               <td>{{user.email}}</td>
+              <td>{{user.dateCreated}}</td>
+              <td>{{user.dateUpdated}}</td>
+              <td>{{user.jpegReference}}</td>
+              <td>{{user.applicationStatus}}</td>
               <td>
-                <button type="button" class="btn btn-success" (click)="editUserPage(user)">Update</button>
+                <button type="button" class="btn btn-warning" (click)="editUserPage(user)">Update</button>
               </td>
               <td>
                 <button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
@@ -41,9 +50,10 @@
           </tbody>
         </table>
       </section>
+      <hr />
     </div>
   </div>
-  <div class="container">
-      <button type="button" class="btn btn-primary" (click)="redirectNewUserPage()">New User</button>
-    </div>
+</div>
+<div class="container">
+    <button type="button" class="btn btn-primary pull-right" (click)="redirectNewUserPage()">New User</button>
 </div>
