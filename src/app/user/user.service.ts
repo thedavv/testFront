@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from "./user";
 import { Http, Response } from "@angular/http";
+import 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs/Observable";
@@ -8,7 +9,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class UserService {
 
-  private apiUrl = 'http://localhost:8080/api/users';
+  private apiUrl = 'http://localhost:8080/api/applicants';
 
   constructor(private http: Http) {
   }
