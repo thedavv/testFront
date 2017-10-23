@@ -82,7 +82,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['applicationStatus'].value);
           //this.userService.updateUser(user).subscribe();
           //this.upload();
-          this.userService.putFileToStorage(user,this.selectedFiles.item(0)).subscribe();
+          this.userService.putWithFile(user,this.selectedFiles.item(0)).subscribe();
       } else {
         let user: User = new User(null,
           this.userForm.controls['firstName'].value,
@@ -96,7 +96,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
          
         //this.upload();
         
-        this.userService.pushWithFile(user,this.selectedFiles.item(0)).subscribe();
+        this.userService.postWithFile(user,this.selectedFiles.item(0)).subscribe();
       }
 
       this.userForm.reset();
