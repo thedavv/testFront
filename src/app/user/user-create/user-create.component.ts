@@ -39,9 +39,9 @@ export class UserCreateComponent implements OnInit, OnDestroy {
         Validators.required,
         Validators.pattern("[^ @]*@[^ @]*")
       ]),
-      dateCreated: new FormControl({value: '', disabled: true}),
-      dateUpdated: new FormControl({value: '', disabled: true}),
-      jpegReference: new FormControl({value: '', disabled: true}, Validators.required),
+      dateCreated: new FormControl({ value: '', disabled: true }),
+      dateUpdated: new FormControl({ value: '', disabled: true }),
+      jpegReference: new FormControl({ value: '', disabled: true }, Validators.required),
       applicationStatus: new FormControl('', Validators.required),
     });
 
@@ -80,9 +80,14 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['dateUpdated'].value,
           this.userForm.controls['jpegReference'].value,
           this.userForm.controls['applicationStatus'].value);
-          //this.userService.updateUser(user).subscribe();
-          //this.upload();
-          this.userService.putWithFile(user,this.selectedFiles.item(0)).subscribe();
+        //this.userService.updateUser(user).subscribe();
+        //this.upload();
+        // check if file is not selected
+        if (this.selectedFiles == null) {
+          this.userService.putWithFile(user, null).subscribe();
+        } else{
+        this.userService.putWithFile(user, this.selectedFiles.item(0)).subscribe();
+        }
       } else {
         let user: User = new User(null,
           this.userForm.controls['firstName'].value,
@@ -92,11 +97,11 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['dateUpdated'].value,
           this.userForm.controls['jpegReference'].value,
           this.userForm.controls['applicationStatus'].value);
-       // this.userService.saveUser(user).subscribe();
-         
+        // this.userService.saveUser(user).subscribe();
+
         //this.upload();
-        
-        this.userService.postWithFile(user,this.selectedFiles.item(0)).subscribe();
+
+        this.userService.postWithFile(user, this.selectedFiles.item(0)).subscribe();
       }
 
       this.userForm.reset();
@@ -123,7 +128,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
 
   upload() {
     this.currentFileUpload = this.selectedFiles.item(0);
-   
+
     //this.userService.pushFileToStorage(this.currentFileUpload).subscribe()
 
     //this.selectedFiles = undefined
