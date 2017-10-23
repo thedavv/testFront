@@ -15,8 +15,13 @@ export class UserCreateComponent implements OnInit, OnDestroy {
   id: number;
   user: User;
 
+  // form model
   userForm: FormGroup;
   private sub: any;
+
+  // file upload  
+  selectedFiles: FileList;
+  currentFileUpload: File;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -34,10 +39,10 @@ export class UserCreateComponent implements OnInit, OnDestroy {
         Validators.required,
         Validators.pattern("[^ @]*@[^ @]*")
       ]),
-      dateCreated: new FormControl('', Validators.required),
-      dateUpdated: new FormControl('', Validators.required),
-      jpegReference: new FormControl('', Validators.required),
-      applicationStatus: new FormControl('', Validators.required)
+      dateCreated: new FormControl({value: '', disabled: true}),
+      dateUpdated: new FormControl({value: '', disabled: true}),
+      jpegReference: new FormControl({value: '', disabled: true}, Validators.required),
+      applicationStatus: new FormControl('', Validators.required),
     });
 
     if (this.id) { //edit form
@@ -51,7 +56,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
             dateCreated: user.dateCreated,
             dateUpdated: user.dateUpdated,
             jpegReference: user.jpegReference,
-            applicationStatus: user.applicationStatus
+            applicationStatus: user.applicationStatus,
           });
         }, error => {
           console.log(error);
@@ -75,7 +80,9 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['dateUpdated'].value,
           this.userForm.controls['jpegReference'].value,
           this.userForm.controls['applicationStatus'].value);
-        this.userService.updateUser(user).subscribe();
+          //this.userService.updateUser(user).subscribe();
+          //this.upload();
+          this.userService.putFileToStorage(user,this.selectedFiles.item(0)).subscribe();
       } else {
         let user: User = new User(null,
           this.userForm.controls['firstName'].value,
@@ -85,17 +92,40 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['dateUpdated'].value,
           this.userForm.controls['jpegReference'].value,
           this.userForm.controls['applicationStatus'].value);
-        this.userService.saveUser(user).subscribe();
+       // this.userService.saveUser(user).subscribe();
+         
+        //this.upload();
+        
+        this.userService.pushWithFile(user,this.selectedFiles.item(0)).subscribe();
       }
 
       this.userForm.reset();
-      this.router.navigate(['/user']);
+     // this.router.navigate(['/user']);
     }
   }
 
   redirectUserPage() {
     this.router.navigate(['/user']);
-
   }
 
+  // file upload
+  selectFile(event) {
+    const file = event.target.files.item(0);
+
+    if (file.type.match('image.*')) {
+      this.selectedFiles = event.target.files;
+      this.userForm.controls['jpegReference'].setValue(this.selectedFiles.item(0).name);
+      //this.userForm.controls['fileUpload'].setValue(this.selectedFiles.item(0))
+    } else {
+      alert('invalid format!');
+    }
+  }
+
+  upload() {
+    this.currentFileUpload = this.selectedFiles.item(0);
+   
+    //this.userService.pushFileToStorage(this.currentFileUpload).subscribe()
+
+    //this.selectedFiles = undefined
+  }
 }

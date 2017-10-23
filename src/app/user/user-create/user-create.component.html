@@ -39,7 +39,12 @@
             <label>Status</label>
             <input type="text" class="form-control" formControlName="applicationStatus">
           </div>
-
+          <!-- picture submit -->
+          <div>
+            <label>Picture</label>
+            <input type="file" (change)="selectFile($event)" accept="image/*">
+          </div>
+             <!-- form submit -->
           <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
           <button type="button" class="btn btn-warning" (click)="redirectUserPage()">Cancel</button>
           <pre>{{userForm.value | json}}</pre>
@@ -48,3 +53,4 @@
     </div>
   </div>
 </div>
+
