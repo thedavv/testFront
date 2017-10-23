@@ -100,7 +100,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
       }
 
       this.userForm.reset();
-     // this.router.navigate(['/user']);
+      this.router.navigate(['/user']);
     }
   }
 
