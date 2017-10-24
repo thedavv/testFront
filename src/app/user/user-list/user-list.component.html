@@ -26,6 +26,7 @@
               <th>Date Updated</th>
               <th>Picture reference</th>
               <th>Status of applicantion</th>
+              <th>Picture of Applicant</th>
               <th>Update</th>
               <th>Delete</th>
             </tr>
@@ -40,6 +41,7 @@
               <td>{{user.dateUpdated}}</td>
               <td>{{user.jpegReference}}</td>
               <td>{{user.applicationStatus}}</td>
+              <td> <img src="http://localhost:8080/api/applicants/img/{{user.id}}" width="60" height="60"></td>
               <td>
                 <button type="button" class="btn btn-warning" (click)="editUserPage(user)">Update</button>
               </td>

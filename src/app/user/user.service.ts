@@ -6,6 +6,7 @@ import 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs/Observable";
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Injectable()
 export class UserService {
@@ -46,7 +47,7 @@ export class UserService {
   }
 
   // file upload
-  pushWithFile(user: User, file:File): Observable<HttpEvent<{}>> {
+  postWithFile(user: User, file:File): Observable<HttpEvent<{}>> {
     let formdata: FormData = new FormData();
 
     formdata.append('file', file);
@@ -55,7 +56,7 @@ export class UserService {
     console.log(file);
     console.log(user);
 
-    const req = new HttpRequest('POST', 'http://localhost:8080/api/applicants', formdata, {
+    const req = new HttpRequest('POST', this.apiUrl, formdata, {
       reportProgress: true,
       responseType: 'text'
     });
@@ -63,7 +64,7 @@ export class UserService {
     return this.httpclient.request(req);
   }
 
-  putFileToStorage(user: User, file:File): Observable<HttpEvent<{}>> {
+  putWithFile(user: User, file:File): Observable<HttpEvent<{}>> {
     let formdata: FormData = new FormData();
 
     formdata.append('file', file);
@@ -72,11 +73,16 @@ export class UserService {
     console.log(file);
     console.log(user);
 
-    const req = new HttpRequest('PUT', 'http://localhost:8080/api/applicants', formdata, {
+    const req = new HttpRequest('PUT', this.apiUrl, formdata, {
       reportProgress: true,
       responseType: 'text'
     });
 
     return this.httpclient.request(req);
   }
+
+  findImgById(id: number){
+    return this.http.get('http://localhost:8080/api/img' + '/' + id)
+      .map(image => image.text())
+    }
 }

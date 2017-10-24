@@ -12,12 +12,14 @@ import { Router } from '@angular/router';
 export class UserListComponent implements OnInit {
 
   private users: User[];
+  
 
   constructor(private router: Router,
     private userService: UserService) { }
 
   ngOnInit() {
     this.getAllUsers();
+
   }
 
   getAllUsers() {
@@ -28,7 +30,6 @@ export class UserListComponent implements OnInit {
       err => {
         console.log(err);
       }
-
     );
   }
 
